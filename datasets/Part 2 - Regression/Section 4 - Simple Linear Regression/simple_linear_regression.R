@@ -1,11 +1,15 @@
+# Autor: juangabriel & Kevin Meza
+# Version: 13-12-2019
+
 # Regresión Lineal Simple
 
+#Nos dirigimos a la carpeta donde se encuentra el archivo
+setwd("/home/kevinml/Documentos/Udemy/machinelearning-az/datasets/Part 2 - Regression/Section 4 - Simple Linear Regression/")
 # Importar el dataset
 dataset = read.csv('Salary_Data.csv')
 #dataset = dataset[, 2:3]
 
 # Dividir los datos en conjunto de entrenamiento y conjunto de test
-# install.packages("caTools")
 library(caTools)
 set.seed(123)
 split = sample.split(dataset$Salary, SplitRatio = 2/3)
@@ -17,10 +21,18 @@ testing_set = subset(dataset, split == FALSE)
 # testing_set[,2:3] = scale(testing_set[,2:3])
 
 # Ajustar el modelo de regresión lineal simple con el conjunto de entrenamiento
+# La primera variable es la dependiente y la segunda la independiene.
 regressor = lm(formula = Salary ~ YearsExperience,
                data = training_set)
+# Si queremos obtener informacion sobre la regresion podemos hacer: summary(regressor)
+# El valorde R-squared Multiple/Ajustado nos indica que tan buena es la regresion lineal, estan los residuos y los p-valores para contrastar la hipótesis de regresión lineal.
+# Los coeficientes son IMPORTANTES: 
+# (INTERCEPT) - ORDENADA DEL ORIGEN; suel do con cero años de experiencis
+# PENDIENTE; que tanto aumenta el sueldo por cada año de experiencia
 
 # Predecir resultados con el conjunto de test
+
+# OJO: Las columnas del newdata debenllamarse igual a las que se utilizaron ara crear al modelo lineal.
 y_pred = predict(regressor, newdata = testing_set)
 
 # Visualización de los resultados en el conjunto de entrenamiento

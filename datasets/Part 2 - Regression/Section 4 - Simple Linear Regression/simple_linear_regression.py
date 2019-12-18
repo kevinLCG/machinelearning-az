@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/home/kevinml/anaconda3/bin/python3.7
 # -*- coding: utf-8 -*-
 """
 Created on Fri Mar  1 12:07:43 2019
@@ -29,7 +29,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 """
 from sklearn.preprocessing import StandardScaler
 sc_X = StandardScaler()
-X_train = sc_X.fit_transform(X_train)
+X_train = sc_X.fit_transform(X_train
 X_test = sc_X.transform(X_test)
 """
 
