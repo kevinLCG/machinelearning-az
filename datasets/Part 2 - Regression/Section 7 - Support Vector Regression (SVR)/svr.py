@@ -3,7 +3,7 @@
 """
 Created on Mon Mar 11 18:38:15 2019
 
-@author: juangabriel
+@author: juangabriel and Kevin Meza
 """
 
 # SVR
