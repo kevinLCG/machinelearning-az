@@ -1,0 +1,72 @@
+# Random Forest Regression
+
+################################################
+###          IMPORTAR EL DATA SET            ###
+################################################
+
+dataset = read.csv('Position_Salaries.csv')
+dataset = dataset[, 2:3]
+
+#################################################################################
+### Dividir el data set en conjunto de entrenamiento y conjunto de testing    ###
+#################################################################################
+
+# En este caso no se hara por la escases de datos
+
+# library(caTools)
+# set.seed(123)
+# split = sample.split(dataset$Purchased, SplitRatio = 0.8)
+# training_set = subset(dataset, split == TRUE)
+# testing_set = subset(dataset, split == FALSE)
+
+
+################################################
+#            Escalado de variables             #
+################################################
+
+# training_set[,2:3] = scale(training_set[,2:3])
+# testing_set[,2:3] = scale(testing_set[,2:3])
+
+############################################################
+##  Ajustar la regresión polinómica con todo el dataset    #
+############################################################
+
+# install.packages("randomForest")
+library(randomForest)
+set.seed(1234)
+# En el valor del parametro "x" de toman los valores de la columna 1 por su indice
+#  y no como dataset$<columna>. Esto porquela funcion recibe un dataframe y al acceder
+# por indice, se genera un sub dataframe, mientras que si se toma la columna con "$",
+# se genera un vector.
+# Por otro lado, el parametro "y" si recibe un vector.
+# El parametro "ntree", hace referencia al numero de arboles de regresion a utilizar.
+regression = randomForest(x = dataset[1],
+                          y = dataset$Salary,
+                          ntree = 500)
+
+# Recomendacion: Variar el numero de arboles para ver como cambian los resultados. Las grafica no se
+# vuelve mas suave al aumentar el numero de arboles, pero el resultado vaya que si aumenta.
+
+################################################
+#                PREDICCION                    #
+################################################
+
+y_pred = predict(regression, newdata = data.frame(Level = 6.5))
+
+################################################
+#        VISUALIZACION DE RESULTADOS           #
+################################################
+
+# Visualización del modelo de Random Forest
+# install.packages("ggplot2")
+library(ggplot2)
+x_grid = seq(min(dataset$Level), max(dataset$Level), 0.01)
+ggplot() +
+  geom_point(aes(x = dataset$Level , y = dataset$Salary),
+             color = "red") +
+  geom_line(aes(x = x_grid, y = predict(regression, 
+                                        newdata = data.frame(Level = x_grid))),
+            color = "blue") +
+  ggtitle("Predicción (Random Forest)") +
+  xlab("Nivel del empleado") +
+  ylab("Sueldo (en $)")
