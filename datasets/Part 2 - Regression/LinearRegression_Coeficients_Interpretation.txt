@@ -1,0 +1,10 @@
+=====================================
+COEFICIENTES DE LA REGRESION LINEAL
+=====================================
+
+Lo primero que hay que notar es el signo del coeficiente, que sera un indicador de si la variable independiente en cuestion esta correlacionada positiva o negativamente con la variable dependiente.
+
+Checar las unidades de los coeficientes para no tener una interpretacion erronea, de ahi la importancia de escalar los datos.
+RECORDAR: Los coeficientes representan las unidades.
+
+Los coeficientes representan por cada unidad de la variable independiente, cuanto aumenta o decrementa la variable dependiente. Por unidad de "<variable independiente>" aumenta ...  en <variable dependiente>

@@ -122,7 +122,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 #            Escalado de variables             #
 ################################################
 
-# Para los arboles de decision no suele hacerse escalado de variables.
 # En este caso es muy importante hacer este paso, sino pueden ocurrir errores
 # Escalamos el escalado de la variable "X" y de "y", antes se habia hecho del
 # conjunto de Entrenamiento y de Testing.

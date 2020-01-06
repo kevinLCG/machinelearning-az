@@ -8,21 +8,22 @@ Created on Thu Mar  7 19:04:40 2019
 
 # CART (Classification and Regression Trees)
 # =======================================================================================================
-# Si graficamos en 2D datos de 2 variables independientes (X1,X2) que permitiran predecir  una variable
-# dependiente, el algoritmo dividira los conjuntos de puntos con ineas rectas. El algoritmo mira la entropia,
+# 
+#  Si graficamos en 2D datos de 2 variables independientes (X1,X2) que permitiran predecir  una variable
+# dependiente, el algoritmo dividira los conjuntos de puntos con lineas rectas. El algoritmo mira la entropia,
 # que tan juntos o dispersos pueden estar esos puntos o que similitudes tienen entre si. 
 # Cada uno de estos conjuntos corresponde a un nodo hoja. Se continua haciendo divisiones hasta cierto
-# punto, p.e. Cuando un nodo hoja se quede por lo menos al 5% de datos aoriginal.
+# punto, p.e. Cuando un nodo hoja se quede por lo menos al 5% de datos original.
 # 
 # La idea del algoritmo es que la cantidad de informacion aumenta (es mas acertada) cuando dividimos los 
 # puntos en conjuntos o alguna otra regla, para hacer que el algoritmo converja y no haya Overffiting.
 # 
-# Al mismo tiempo que se divide el vonjunto, se "genera" un arbol. si la primera division fuera que X1 < 20
-# se generarian enntonces 2 ramas. Luego si la sig. div. es que X2 < 170, pero solo en quellos con X1 > 20, 
-# se gerean 2 nuevas ramas dentro de esa rama, y asi sucesivamente.
+# Al mismo tiempo que se divide el conjunto, se "genera" un arbol. si la primera division fuera que X1 < 20
+# se generarian entonces 2 ramas. Luego si la sig. div. es que X2 < 170, pero solo en quellos con X1 > 20, 
+# se generan 2 nuevas ramas dentro de esa rama, y asi sucesivamente.
 # 
 # La 3ra Dimension, dada por la variable dependiente, es la que nos sirve para la prediccion. Se saca la
-# media  de la variable independiente de cada conjunto. Una vez que ingrese un nuevo dato, se enontrara
+# media  de la variable dependiente de cada conjunto. Una vez que ingrese un nuevo dato, se enontrara
 # el nodo hoja al que pertenece haciendo uso de la informacion de las variables independientes, y se le
 # asignara como variable dependiente, la media de ese conjunto para esa variable.
 # 

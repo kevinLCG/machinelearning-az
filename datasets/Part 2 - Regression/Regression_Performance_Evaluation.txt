@@ -1,0 +1,41 @@
+=====================================
+FACTOR R CUADRADO (Bondad de Ajuste)
+=====================================
+
+Busca al modelo que cometa el menor error posible entre la prediccion con respecto a los datos originales. Se busca minimizar la suma de las diferencias elevadas al cuadrado para todos los puntos.
+Este factor/suma minima se llama "suma de los cuadrados de los residuos" (SSres).
+
+Si ahora trazamos una linea horizontal que represente la media global para la variable en el eje y; A esto ambien se le puede aplicar la formula anterior y obtener la suma de las diferencias al cuadrado de los valores menos el valor medio, y se llama "suma de los cuadrados totales" (SStot). 
+OJO.
+Esta ultima NO depende del modelo se este ajustando, mientras que la primera si toma en cuenta si el modelo es lineal o no, etc.
+
+El "FACTOR R CUADRADO" se define como: R^2 = 1 - (SSres/SStot)
+
+Lo que mide R^2 es que tan bueno es el modelo para hacer la prediccion, en lugar de tomar como prediccion la media de los datos. Si R^2  es negativo, significa que el modelo es pesimo, mucho peor que tomar como prediccion la media de los datos.
+
+
+Comparacion de Modelos
+#######################
+
+Resulta que el "SStot" es el siempre el mismo para un datast, mientras que el "SSres" depende del modelo utilizado. De esta forma el mejor modelo tendra un "SSres" mas chico, por lo que R^2 estara mas cerca de 1
+
+
+
+
+===========================
+FACTOR R CUADRADO AJUSTADO
+===========================
+
+Al momento que quiero comparar un modelo de regresion lineal simple con uno multiple ocurre un PROBLEMA matematico. Al momento de añadir una varibale y querer comparar el valor de "R^2", por construccion R^2 siempre aumentara, porque siempre por mas pequeña que sea, habra una correlacion entre una variable y el valor a predecir. Por lo que "R^2" esta sesgado y no sirvve para ver si una variable aporta algo al modelo o no
+
+El "FACTOR R CUADRADO" se define como:  Adj. R^2 = 1 - (SSres/SStot) * (n - 1/n - 1 - p)
+Donde: p - no. de variables regresoras (variables independientes que intervienen en el modelo) 
+       n - tamaño de la muestra (no. de puntos utilizados para crear el modelo), siempre sera el mismo
+
+De esta forma, entre mas variables, el cociente "(SSres/SStot)" y por lo tanto el "FACTOR R CUADRADO" decrece. Y valdra la pena añadir una variable di el aumento en el "FACTOR R CUADRADO" es mayor que la penalizacion por añadir la variable al modelo.
+
+
+
+Decidir si conservamos una variable usando el FACTOR R CUADRADO AJUSTADO
+#########################################################################
+En el caso de la regresion lineal multiple se suele usar al p-value normalmente para decidir si se conserva o se elimina una variable del modelo. Sin embargo, el valor umbral es completamente erbitrario y si el valor obtenido esta muy cerca del umbral, es conveniente hacer uso del "FACTOR R CUADRADO AJUSTADO" para poder determinar el destino de la variable.

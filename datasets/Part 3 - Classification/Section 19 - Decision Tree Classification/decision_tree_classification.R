@@ -1,13 +1,48 @@
 # Clasificación con Árboles de Decisión
 
-# Importar el dataset
+# =======================================================================================================
+# IDEA
+# 
+# Se va cortando en segmentos los datos con lineas rectas.
+# Al mismo tiempo que se divide el conjunto, se "genera" un arbol. si la primera division fuera que X1 < 20
+# se generarian entonces 2 ramas. Luego si la sig. div. es que X2 < 170, pero solo en quellos con X1 > 20, 
+# se generan 2 nuevas ramas dentro de esa rama, y asi sucesivamente. Hasta que se dividan los datos de tal
+# manera que a partir de cuestionar el valor de las variables se pueda determinar la clase de las nuevas
+# observaciones.
+# 
+# Pueede darse el caso en donde ya no se puedan seguir haciendo divisiones puesto que ya existen demasiados
+# niveles de decision que resulta computacionalmente muy costoso y se hacen simplificaciones, pues si es
+# mucho mas probable encontrar una clase que otras, se asigna esa clase y ya no se haen mas ramificaciones;
+# sobretodo cuando se trata con muchas variables.
+# 
+# =======================================================================================================
+# 
+# Mejoras de este Algoritmo:
+#    - Random Forest
+#    - Gradient Boosting
+#
+# =======================================================================================================
+# 
+# CUIDADO
+# ¡ESTE ALGORITMO TIENDE A GENERAR OVERFITTING!
+#
+# =======================================================================================================
+
+################################################
+###          IMPORTAR EL DATA SET            ###
+################################################
+
+setwd("~/Documentos/Udemy/machinelearning-az/datasets/Part 3 - Classification/Section 19 - Decision Tree Classification")
 dataset = read.csv('Social_Network_Ads.csv')
 dataset = dataset[, 3:5]
 
 # Codificar la variable de clasificación como factor
 dataset$Purchased = factor(dataset$Purchased, levels = c(0,1))
 
-# Dividir los datos en conjunto de entrenamiento y conjunto de test
+#################################################################################
+### Dividir el data set en conjunto de entrenamiento y conjunto de testing    ###
+#################################################################################
+
 # install.packages("caTools")
 library(caTools)
 set.seed(123)
@@ -15,23 +50,57 @@ split = sample.split(dataset$Purchased, SplitRatio = 0.75)
 training_set = subset(dataset, split == TRUE)
 testing_set = subset(dataset, split == FALSE)
 
-# Ajustar el clasificador con el conjunto de entrenamiento.
+################################################
+#            Escalado de variables             #
+################################################
+
+# Como el algoritmao de "Arboles de Decision" no hace uso de Distancias Euclidianas, no es necesario
+# escalar las variables.
+
+#########################################################
+##   Ajustar el modelo con el dataset de Entrenamiento  #
+#########################################################
+
+# Crgamos la libreria "rpart" (Recursive Partitioning and Regression Tree)
 #install.packages("rpart")
 library(rpart)
 classifier = rpart(formula = Purchased ~ ., 
                    data = training_set)
 
+################################################
+#                PREDICCION                    #
+################################################
+
 # Predicción de los resultados con el conjunto de testing
+# Si no colocalos el parametro "type=class", el output son las probabilidades
+# de que cada observacion pertenezca a la lase 0 o a la 1. 
+# Al poner este parametro, ahora si si se calculan las clases.
 y_pred = predict(classifier, newdata = testing_set[,-3],
                  type = "class")
 
+################################################
+#        EVALUACION DEL RENDIMIENTO            #
+################################################
+
 # Crear la matriz de confusión
 cm = table(testing_set[, 3], y_pred)
+
+# INTERPRETACION: Las columnas representan el dato real, mientras que las fila la prediccion.
+# La diagonal de izq. a der. representa aquellos casos en los que lagoritmo acerto, mientras
+# que la diagonal que va de der. a izq. representa aquellos caso en los que el algoritmo fallo.
+# VN  FN
+# FP  VP
+
+################################################
+#        VISUALIZACION DE RESULTADOS           #
+################################################
 
 # Visualización del conjunto de entrenamiento
 #install.packages("ElemStatLearn")
 library(ElemStatLearn)
 set = training_set
+# En la grid generamos una secuencia con una mayor diferencia entre los numeros, pues sino serian muchisimos
+# numeros y # seria computacionalmente costoso crear el grafico.
 X1 = seq(min(set[, 1]) - 1, max(set[, 1]) + 1, by = 0.05)
 X2 = seq(min(set[, 2]) - 1, max(set[, 2]) + 1, by = 250)
 grid_set = expand.grid(X1, X2)
@@ -48,6 +117,8 @@ points(set, pch = 21, bg = ifelse(set[, 3] == 1, 'green4', 'red3'))
 
 # Visualización del conjunto de testing
 set = testing_set
+# En la grid generamos una secuencia con una mayor diferencia entre los numeros, pues sino serian muchisimos
+# numeros y # seria computacionalmente costoso crear el grafico.
 X1 = seq(min(set[, 1]) - 1, max(set[, 1]) + 1, by = 0.05)
 X2 = seq(min(set[, 2]) - 1, max(set[, 2]) + 1, by = 250)
 grid_set = expand.grid(X1, X2)

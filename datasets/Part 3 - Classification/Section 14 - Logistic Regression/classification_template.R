@@ -1,13 +1,19 @@
 # Plantilla de Clasificación
 
-# Importar el dataset
+################################################
+###          IMPORTAR EL DATA SET            ###
+################################################
+
 dataset = read.csv('Social_Network_Ads.csv')
 dataset = dataset[, 3:5]
 
 # Codificar la variable de clasificación como factor
 dataset$Purchased = factor(dataset$Purchased, levels = c(0,1))
 
-# Dividir los datos en conjunto de entrenamiento y conjunto de test
+#################################################################################
+### Dividir el data set en conjunto de entrenamiento y conjunto de testing    ###
+#################################################################################
+
 # install.packages("caTools")
 library(caTools)
 set.seed(123)
@@ -15,18 +21,36 @@ split = sample.split(dataset$Purchased, SplitRatio = 0.75)
 training_set = subset(dataset, split == TRUE)
 testing_set = subset(dataset, split == FALSE)
 
-# Escalado de valores
+################################################
+#            Escalado de variables             #
+################################################
+
 training_set[,1:2] = scale(training_set[,1:2])
 testing_set[,1:2] = scale(testing_set[,1:2])
 
-# Ajustar el clasificador con el conjunto de entrenamiento.
+######################################################################
+##       Ajustar el modelo de clasificacion con todo el dataset      #
+######################################################################
+
 # Crear el modelo de clasificación
+
+################################################
+#                PREDICCION                    #
+################################################
 
 # Predicción de los resultados con el conjunto de testing
 y_pred = predict(classifier, newdata = testing_set[,-3])
 
+################################################
+#        EVALUACION DEL RENDIMIENTO            #
+################################################
+
 # Crear la matriz de confusión
 cm = table(testing_set[, 3], y_pred)
+
+################################################
+#        VISUALIZACION DE RESULTADOS           #
+################################################
 
 # Visualización del conjunto de entrenamiento
 #install.packages("ElemStatLearn")

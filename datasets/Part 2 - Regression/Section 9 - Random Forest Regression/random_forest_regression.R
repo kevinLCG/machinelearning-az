@@ -1,5 +1,24 @@
 # Random Forest Regression
 
+# =======================================================================================================
+#
+# Es una version mejorada de la regresion por Arbol de Decision, pues ahora son muchos de estos. De esta
+# manera se reduce el error y evita que haya cambios bruscos en la prediccion.
+#
+# PASOS:
+# 1.- Elegir un numero aleatorio "k" de puntos de datos del Conjunto de entrenamiento 
+# 2.- Se construye un arbol aleatorio de regresion asociado a esos "k" puntos.
+# 3.- Elegir el numero de arboles a construir y repetir los pasos 1 y 2.
+#     NOTA: Cada arbol tendra una vision parcial del conjunto global de entrenamiento.
+# 4.- Para un nuevo nuevo dato. Cada uno de los arboles  hara una prediccion del valor "y" para el punto en
+#     cuestion. La prediccion final sera un promedio de todas las predicciones de los arboles.
+# 
+# En ciertas ocasiones en lugar de la media sse utiliza la mediana, para evitar la distorcion por outliers
+# o la media recortada, donde se quita el 5% de valores mas grandes y el 5% de valores mas chicos.
+# 
+# =======================================================================================================
+
+
 ################################################
 ###          IMPORTAR EL DATA SET            ###
 ################################################
