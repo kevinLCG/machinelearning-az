@@ -10,27 +10,27 @@ Created on Sat Mar 23 10:24:47 2019
 
 # =======================================================================================================
 # IDEA
-# 
+#
 # Se va cortando en segmentos los datos con lineas rectas.
 # Al mismo tiempo que se divide el conjunto, se "genera" un arbol. si la primera division fuera que X1 < 20
-# se generarian entonces 2 ramas. Luego si la sig. div. es que X2 < 170, pero solo en quellos con X1 > 20, 
+# se generarian entonces 2 ramas. Luego si la sig. div. es que X2 < 170, pero solo en quellos con X1 > 20,
 # se generan 2 nuevas ramas dentro de esa rama, y asi sucesivamente. Hasta que se dividan los datos de tal
 # manera que a partir de cuestionar el valor de las variables se pueda determinar la clase de las nuevas
 # observaciones.
-# 
-# Pueede darse el caso en donde ya no se puedan seguir haciendo divisiones puesto que ya existen demasiados
+#
+# Puede darse el caso en donde ya no se puedan seguir haciendo divisiones puesto que ya existen demasiados
 # niveles de decision que resulta computacionalmente muy costoso y se hacen simplificaciones, pues si es
 # mucho mas probable encontrar una clase que otras, se asigna esa clase y ya no se haen mas ramificaciones;
 # sobretodo cuando se trata con muchas variables.
-# 
+#
 # =======================================================================================================
-# 
+#
 # Mejoras de este Algoritmo:
 #    - Random Forest
 #    - Gradient Boosting
 #
 # =======================================================================================================
-# 
+#
 # CUIDADO
 # ¡ESTE ALGORITMO TIENDE A GENERAR OVERFITTING!
 #
@@ -76,14 +76,13 @@ from sklearn.tree import DecisionTreeClassifier
 # El parametro "criterion" hace referencia al criterio por el cual se divide una
 # rama en dos ramas, por default el valor es "gini". La mayoria de los Clasificadores
 # usan el criterio que minimiza la entropia "entropy", porque es facil de interpretar.
-# Pues es una medida de la dispersion de la informacion; mide la calidad de las 
+# Pues es una medida de la dispersion de la informacion; mide la calidad de las
 # divisiones para ver cual es la mejor, para que los nodos hoja sean homogeneos y no haya
 # nodos hoja con observaciones con distinta clase y de esta manera se reduce la entropia del
 # nodo padre al hijo.
 # Entropia en un noso es igual a cero (0), el grupo es completamente homogeneo y esta puede
 # clasificar con un cierto de efectividad a las observaciones en la clase correcta.
-
-classifier = DecisionTreeClassifier(criterion="entropy", random_state=0)
+classifier = DecisioTreeClassifier(criterion="entropy", random_state=0)
 classifier.fit(X_train, y_train)
 
 ################################################

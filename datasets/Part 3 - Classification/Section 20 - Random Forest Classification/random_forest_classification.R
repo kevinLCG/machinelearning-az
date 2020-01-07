@@ -1,13 +1,42 @@
 # Random Forest
 
-# Importar el dataset
+# =======================================================================================================
+# IDEA
+#
+# Es una version mejorada de la Clasificacion por Arbol de Decision, pues ahora son muchos de estos. De esta
+# manera se reduce el error en la prediccion. Al dato nuevo se le asigna la clase que hayan eligido la
+# mayoria de los arboles.
+#
+# PASOS:
+# 1.- Se selecciona un numero "k" de puntos aleatorios del Conjunto de entrenamiento.
+# 2.- Construir un arbol de decision asociado a esos "k" puntos de datos.
+# 3.- Elegir un numero "n" de arboles a construir y repetir los pasos 1 y 2.
+# 4.- Para clasificar un nuevo punto, los "n" arboles realizan una prediccion sobre la categoria a la que
+# pertenece este dato. Y asignar le al dato la categoria con mas votos.
+#
+# =======================================================================================================
+#
+# CUIDADO
+# ¡ESTE ALGORITMO TIENDE A GENERAR OVERFITTING!
+#
+# =======================================================================================================
+
+
+################################################
+###          IMPORTAR EL DATA SET            ###
+################################################
+
+setwd("~/Documentos/Udemy/machinelearning-az/datasets/Part 3 - Classification/Section 20 - Random Forest Classification")
 dataset = read.csv('Social_Network_Ads.csv')
 dataset = dataset[, 3:5]
 
 # Codificar la variable de clasificación como factor
 dataset$Purchased = factor(dataset$Purchased, levels = c(0,1))
 
-# Dividir los datos en conjunto de entrenamiento y conjunto de test
+#################################################################################
+### Dividir el data set en conjunto de entrenamiento y conjunto de testing    ###
+#################################################################################
+
 # install.packages("caTools")
 library(caTools)
 set.seed(123)
@@ -15,22 +44,52 @@ split = sample.split(dataset$Purchased, SplitRatio = 0.75)
 training_set = subset(dataset, split == TRUE)
 testing_set = subset(dataset, split == FALSE)
 
-# Escalado de valores
+################################################
+#            Escalado de variables             #
+################################################
+
+# No es encesario escalar las variables, porque el algoritmos no esta basado en
+# distancias Euclidianas. 
+# Escalar las variables si se quiere que el grafico conserve la proporcion y quede mas fino.
+# Pero si se quiere conservar a las variables con la misma escala, comentra las lineas.
+
 training_set[,1:2] = scale(training_set[,1:2])
 testing_set[,1:2] = scale(testing_set[,1:2])
 
-# Ajustar el Random Forest con el conjunto de entrenamiento.
+#########################################################
+##   Ajustar el modelo con el dataset de Entrenamiento  #
+#########################################################
+
 #install.packages("randomForest")
 library(randomForest)
+# El parametro "ntree" hace referencia al numero de arboles de clasificacion a utilizar.
 classifier = randomForest(x = training_set[,-3],
                           y = training_set$Purchased,
-                          ntree = 10)
+                          ntree = 50)
+
+################################################
+#                PREDICCION                    #
+################################################
 
 # Predicción de los resultados con el conjunto de testing
 y_pred = predict(classifier, newdata = testing_set[,-3])
 
+################################################
+#        EVALUACION DEL RENDIMIENTO            #
+################################################
+
 # Crear la matriz de confusión
 cm = table(testing_set[, 3], y_pred)
+
+# INTERPRETACION: Las columnas representan el dato real, mientras que las fila la prediccion.
+# La diagonal de izq. a der. representa aquellos casos en los que lagoritmo acerto, mientras
+# que la diagonal que va de der. a izq. representa aquellos caso en los que el algoritmo fallo.
+# VN  FN
+# FP  VP
+
+################################################
+#        VISUALIZACION DE RESULTADOS           #
+################################################
 
 # Visualización del conjunto de entrenamiento
 #install.packages("ElemStatLearn")

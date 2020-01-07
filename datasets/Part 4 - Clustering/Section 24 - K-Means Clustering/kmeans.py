@@ -1,9 +1,9 @@
-#!/usr/bin/env python3
+#!/home/kevinml/anaconda3/bin/python3.7
 # -*- coding: utf-8 -*-
 """
 Created on Tue Mar 26 12:39:36 2019
 
-@author: juangabriel
+@author: juangabriel and Kevin Meza
 """
 
 # K-Means

@@ -1,0 +1,49 @@
+FALSOS POSITIVOS Y FALSOS NEGATIVOS
+####################################
+
+Errores de Tipo I / Falsos Positivos
+Usuarios que  con de la categoria 0, pero el modelo los clasifica como de categoria 1.
+
+Errores de Tipo II / Falsos Negativos
+Usuarios que  con de la categoria 1, pero el modelo los clasifica como de categoria 0.
+Este tipo de error generalmente suele ser mas peligroso, en enferemedades, marketting, desastres naturales, etc.
+
+
+MATRIZ DE CONFUSION
+####################
+VP  FP
+FN  VN 
+
+Se prueden calcular 2 metricas, la primera es la "Tasa de Precision" (PR) = Correctos/Total y 
+la otra es la "Tasa de Error" (ER) = Incorrectos/Total.
+
+
+PARADOJA DE LA PRECISION
+#########################
+
+Cuando una clase es mucho mas probable que las demas (es decir, hay un desbalance de clases), es mejor no crear un modelo. Porque por pura probabilidad las nuevas observaciones perteneceran a la clase mas abundante, e incluso si todas las predicciones son la clase mas abundante, se puede logran una mejor "Precision" que si se utiliza un modelo de Clasificacion.
+
+
+CURVAS CAP (Perfil de Precision Acumulado)
+############################################
+
+Es una curva que sirve para ver que tan bien funciona un modelo en comparacion a una selecicon aleatoria; entre mayor area haya debajo de la curva, mejor es el modelo. ES MUY UTIL PARA COMPARAR MODELOS DE CLASIFICACION.
+
+El incremento en la precision de un modelo determinado con respecto al modelo aleatorio, se le conoce como "ganancia en precision" y se puede cuantificar al sacar el area bajo la curva.
+	Siempre hay que ver cual seria el modelo perfecto, para ver que ninguna curva pueda ser mejor que esa.
+
+NO CONFUNDIR CON LAS CURVAS ROC (Caracteristica Operativa del Receptor)
+
+# Cociente de Areas
+
+Podemos que comparar un modelo con el modelo "perfecto" obteniendo el area bajo la curva, entre la curva CAP del modelo y la curva/linea del modelo aleatorio.
+Al dividir el area del modelo "perfecto" entre el area del modelo en cuestion, entre mas cerca este el cociente de 1, estara mas cerca del modelo "perfecto".
+
+Otro enfoque para evaluar que tan bueno es un modelo.
+Consiste en tomar el valor medio del eje x (el 50%) y proyectarlo al eje y (que indica la precision).
+Si..
+	90% < P < 100% - Demasiado Bueno    (OJO CON EL OVERFITTING y EL TRATAMIENTO DE LAS VARIABLES)
+	80% < P < 90% - Muy Bueno
+	70% < P < 80% - Bueno
+	60% < P < 70% - Malo
+	P < 60% - Una Basura

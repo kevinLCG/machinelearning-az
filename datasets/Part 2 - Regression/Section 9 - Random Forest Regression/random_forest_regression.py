@@ -68,7 +68,7 @@ X_test = sc_X.transform(X_test)"""
 # https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html
 from sklearn.ensemble import RandomForestRegressor
 # El parametro "n_estimators", hace referencia al numero de arboles de regresion a utilizar.
-# El parametro "criteriom", hace referencia al criterio con el que se dividira una rama en subramas
+# El parametro "criterion", hace referencia al criterio con el que se dividira una rama en subramas
 # o en nodos hoja, por default es "mse" error minimo cuadrado.
 # El parametro "max_features", hace referencia al numero de caracteristicas que seran tomadas en
 # al momento de hacer las ramificaciones, por defecto son todas.
