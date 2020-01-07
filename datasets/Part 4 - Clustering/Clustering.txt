@@ -5,3 +5,9 @@ En esta parte del curso, entenderás como implementar los siguientes algoritmos 
     Clustering con K-Means
 
     Clustering Jerárquico
+
+
+
+# PROS Y CONTRAS DE LOS METODOS DE CLUSTERING
+
+https://www.superdatascience.com/wp-content/uploads/2017/02/Clustering-Pros-Cons.pdf
