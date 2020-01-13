@@ -82,7 +82,7 @@ from sklearn.tree import DecisionTreeClassifier
 # nodo padre al hijo.
 # Entropia en un noso es igual a cero (0), el grupo es completamente homogeneo y esta puede
 # clasificar con un cierto de efectividad a las observaciones en la clase correcta.
-classifier = DecisioTreeClassifier(criterion="entropy", random_state=0)
+classifier = DecisionTreeClassifier(criterion="entropy", random_state=0)
 classifier.fit(X_train, y_train)
 
 ################################################

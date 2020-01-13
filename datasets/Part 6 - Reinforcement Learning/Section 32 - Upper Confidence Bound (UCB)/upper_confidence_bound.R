@@ -1,39 +1,98 @@
 # Upper Confidence Bound
 
-# Importar los datos
+# =======================================================================================================
+# PASOS
+# 
+# NOTAS: Se considera que cada recompensa puede ser diferente en cada ronda.
+#        Entre MAYOR es la "n", MENOR es la amplitud del intervalo de confianza.
+#
+# 1.- En cada ronda "n" se consideran 2 numeros para cada anuncio "i":
+#       N(n) = Numero de veces que el anuncio "i" se selecciona en la ronda "n".
+#       R(n) = La suma de recompensas del anuncio "i" hasta la ronda "n".
+# 2.- A partir de estos 2 numeros, se calcula:
+#     - La recompensa media del anuncio "i" hasta la ronda "n".
+#       r(n)=  R(n)/ N(n)
+#
+#     - El intervalo de confianza de la ronda "n".
+#       ( r(n)-Δ(n) , r(n)+Δ(n) );     Donde:
+#       Δ(n) = sqrt( 3*log(n) / 2*N(n) )
+#
+# 3.- Se selecciona el anuncio "i" con mayor limite superior del intervalo de confianza (UCB)
+#
+# En un inicio, se parte del supuesto de que las medias y los intervalos de confianza de cada una de las
+# distribuciones son iguales y con al paso del tiempo al juntar observaciones, se va definiendo el valor
+# medio de recompensa de cada una, al igua que los intervalos de confianza. Recordando que ntre mayor sea
+# la "n", mrnor sera la amplitud del intervalo de confianza. 
+#
+# Primero se comienza a tirar en todas las maquinas (muestreando asi todas las distribuciones) y despues
+# de ciertas iteraciones, se comienza a tirar (muestrear) la maquina (la distribucion) con el mayor limite 
+# superior del intervalo de confianza (UCB), hasta que el algoritmo converja.
+#
+# =======================================================================================================
+
+################################################
+###          IMPORTAR EL DATA SET            ###
+################################################
+
+setwd("~/Documentos/Udemy/machinelearning-az/datasets/Part 6 - Reinforcement Learning/Section 32 - Upper Confidence Bound (UCB)")
 dataset = read.csv("Ads_CTR_Optimisation.csv")
 
-# Implementar UCB
+################################################
+#    Implementacion del Algoritmo de UCB       #
+################################################
+
 d = 10
 N = 10000
-number_of_selections = integer(d)
-sums_of_rewards = integer(d)
-ads_selected = integer(0)
-total_reward = 0
+number_of_selections = integer(d) # aqui se guardara el numero de veces que se muestreo cada anuncio. Vectro inicializado con 0's de tamaño igual al no. de observaciones.
+sums_of_rewards = integer(d) # aqui se guardara la recompenza de cada anuncio
+ads_selected = integer(0) # vector con el numero de anuncio elegido en cda ronda
+total_reward = 0 # recompenza total
 for(n in 1:N){
-  max_upper_bound = 0
-  ad = 0
+  max_upper_bound = 0 # Contiene el UCB de la ronda
+  ad = 0 # Contiene el numero del anuncio con el mayor intervalo de confianza
+
+  # En la ronda actual, para cada anuncio, se obtiene la "recompensa media" y el limite superior del intervalo de confianza
+  # y se actualiza el UCB si es necesario
   for(i in 1:d){
     if(number_of_selections[i]>0){
+      # Se obtiene la recompensa media
       average_reward = sums_of_rewards[i] / number_of_selections[i]
+      # Se obtiene Δn, para sacar el intervalo de confianza; sumamos 1 para no dividir entre cero
       delta_i = sqrt(3/2*log(n)/number_of_selections[i])
+      # Se obtiene el limite superior del intervalo de confianza
       upper_bound = average_reward + delta_i
     }else{
+      # Para las primeras rondas cuando no se ha seleccionado el anuncio, se le asigna como como "upper confidence bound" el numero 10^400
+      # Asi ningun anuncio sera mejor que otro en la primera ronda.
+      # En la primera ronda se eligira el primer anuncio, en la siguiente ronda el segundo, despues el tercero y asi sucesivamente,
+      # esto con la intencion de que al menos todos sean muestreados 1 vez, por eso el numero "10^400".
       upper_bound = 1e400
     }
+    # Si el limite superior del intervalo de confianza del actual anuncio supera al UCB, este pasa a ser el nuevo UCB
     if(upper_bound > max_upper_bound){
       max_upper_bound = upper_bound
       ad = i
     }
   }
+  # se añade a la lista correspondiente el anuncio "elegido", es decir, con el UCB hasta esa ronda
   ads_selected = append(ads_selected, ad)
+  # se le suma 1 al vector que contiene cuantas veces se ha elegido el anuncio
   number_of_selections[ad] = number_of_selections[ad] + 1
+  # Se guarda la recompensa de seleccionar ese anuncio
   reward = dataset[n, ad]
+  # A la recompenza previa del anuncio "elegido", se le suma la recompenza conseguida en esta ronda
   sums_of_rewards[ad] = sums_of_rewards[ad] + reward
+  # Se suma la recompenza de esta ronda a la recompenza total
   total_reward = total_reward + reward
 }
 
-# Visualización de resultados - Histograma
+# En cada ronda, siempre se va seleccionar el anuncio con el UCB
+
+################################################
+#        VISUALIZACION DE RESULTADOS           #
+################################################
+
+# Histograma de resultados
 hist(ads_selected,
      col = "lightblue",
      main = "Histograma de los Anuncios",

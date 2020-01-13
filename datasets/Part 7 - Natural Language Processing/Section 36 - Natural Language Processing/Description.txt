@@ -1,0 +1,23 @@
+El Procesamiento del Lenguaje Natural (o NLP) es aplicar modelos de  Machine Learning a texto y lenguaje. Enseñar a una máquina a entender un texto hablado y escrito es el foco principal del Procesamiento del Lenguaje Natural. Cada vez que dictas algo a tu iPhone o Android, habrás visto que se convierte en texto. Esa es la magia del algoritmo de NLP..
+
+También puedes usar el NLP en una reseña en forma de texto para predecir si se trata de una reseña positiva o negativa. Se puede usar NLP en un artículo para predecir a qué categorías de artículos se está intentando segmentar (noticia, divulgación, matemáticas...). También se puede predecir gracias a NLP el género de un libro. Y todavía pueden hacerse más cosas, pues puede usarse el NLP para hacer un traductor, un sistema de reconocimiento de diálogos o incluso clasificar un idioma en función de sus palabras. Por cierto, hablando de clasificación, la mayoría de algoritmos de NLP son en última instancia algoritmos de clasificación, lo cual incluye Regresión Logística, Naive Bayes, CART en particular los árboles de decisión, maximización de la entropía, Hidden Markov Models que son modelos basados en procesos de Markov....
+
+Un algoritmo muy conocido del mundo del NLP es la técnica del Bag of Words. Es un modelo utilizado para pre procesar textos que necesitan clasificarse antes de ajustar el algoritmo de clasificación basándonos en las observaciones que contienen los textos.
+
+En esta parte del curso aprenderás a:
+
+  -  Limpiar los textos para prepararlos para los modelos de Machine Learning,
+
+  -  Crear un modelo de "Bag of Words"
+
+  -  Aplicar algoritmos de Machine Learning al modelo de "Bag of Worlds".
+
+
+# Librerias de NLP:
+- Natural Languaje Toolkit
+- SpaCy (spyder python)
+- Standford NLP
+- Open NLP
+
+# "Bag of Words"
+Modelo de NLP que sir

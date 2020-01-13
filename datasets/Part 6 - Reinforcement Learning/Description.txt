@@ -1,0 +1,50 @@
+##########################
+# Reinforcement Learning #
+##########################
+
+Reinforcement Learning (o aprendizaje por refuerzo) es una rama del Machine Learning, llamada también Online Learning. Se utiliza para resolver problemas de interacción, donde los datos observados hasta el momento t son considerados para decidir qué acción se lleva a cabo en el momento t + 1. También es muy utilizada en Inteligencia Artificial cuando se entrenan máquinas capaces de hacer tareas como caminar, o conducción de coches inteligentes. Un resultado esperado proporciona una recompensa a la IA, mientras que uno no deseado le otorga un castigo (como si se tratara de educar un humano o un animal). En este caso las Máquinas aprenden a través de ensayo y error.
+
+En esta parte del curso aprenderemos a implementar los dos modelos de  Reinforcement Learning siguientes:
+
+ -  Upper Confidence Bound (UCB)
+
+ -  Muestreo Thompson 
+
+
+Problema del Vandido Multibrazo
+################################
+Habla de maquinas "tragaperras", donde cada una tiene una distribucion diferente con la que arroja premios, el objetivo es averiguar cual es la mejor maquina para apostar.
+
+Todo se basa en buscar los "limites de confianza" del jugador. Se busca hasta donde se esta dispuesto a llegar y hasta donde no. Aquel problema que supere el limite de confianza, generara la "frustracion" del jugador. 
+La metodologia sera jugar en las maquinas durante un tiempo prolongado, pero sin exceso de informacion.
+
+EL PROBLEMA RADICA EN QUE NO SE TIENE INFORMACION A PRIORI QUE PUEDA SERVIR DE GUIA PARA EFECTUAR UNA MEJOR DECISION Y HAY QUE EXPLORAR PRIMERO Y VER LOS RESULTADOSS
+
+- Publicidad Coca-Cola
+
+Un caso similar es cuando se hace una campaña de marketing y se quiere ver que anuncio tiene el mejor resultdo / "mejor conversion". 
+Se busca conocer las distribuciones de las calificaciones de los anuncios.
+
+
+
+
+Comparacion del UCB vs Muestreo de Thompson
+#############################################
+
+UCB
+* Algotitmo Determinista
+     El valor que se escoje no cambia mucho en posteriores iteraciones. No hay nada aleatorio que vaya a cambiar.
+* Requiere 1 actualizacion por Ronda
+     Se actualiza en cada ronda el valor del intervalo de confianza. Esto lo hace que sea computacionalmente costoso.
+
+NOTA: EXISTEN MEJORAS DE ESTE ALGORITMO
+
+
+Muestreo de Thompson
+* Algoritmo Probabilistico
+     Se generan valores medios aleatoriamente que corresponden a la distribucion
+* Se amolda con el feedback a posteriori
+  Permite retrasar el calculo de los datos. Util en paginas web para no saturar el sistema, ademas de que es computacionalmente costoso hacerlo. Generea lotes de muestras y se actualiza 1 vez cada cada cierto tiempo o ciertas muestras
+
+
+EMPIRICAMENTE SE HA MOSTRADO QUE EL MUESTREO DE THOMPSON ES MEJOR QUE EL DE UCB.

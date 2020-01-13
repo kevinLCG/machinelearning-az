@@ -1,7 +1,8 @@
-#!/usr/bin/env python
+#!/home/kevinml/anaconda3/bin/python3.7
 
 """
-a simple implementation of Apriori algorithm by Python.
+LIBRERIA
+A simple implementation of Apriori algorithm by Python.
 """
 
 import sys

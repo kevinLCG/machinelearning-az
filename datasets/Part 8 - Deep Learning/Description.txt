@@ -1,0 +1,80 @@
+El llamado Deep Learning es la rama más emocionante y poderosa del mundo del Machine Learning. Los modelos de Deep Learning sirven para una gran variedad de tareas muy complejas:
+
+    Redes Neuronales Artificiales para problemas de  Regresión y Clasificación
+
+    Redes Neuronales Convolucionales para problemas de Visión por Computador
+
+    Redes Neuronales Recurrentes para el Análisis de Series Temporales
+
+    Mapas Auto Organizados para Extracción de Rasgos
+
+    Máquinas de Boltzmann Profundas para Sistemas de Recomendación
+
+    Codificadores automáticos para Sistemas de Recomendación
+
+En esta parte del curso nos centraremos en entender y aprender a implementar los siguientes modelos de Deep Learning:
+
+    Redes Neuronales Artificiales para problemas de Empresa
+
+    Redes Neuronales Convolucionales para problemas de Visión por Computador
+
+
+
+########################################################################################################
+                                              TEMAS
+########################################################################################################
+
+-------------- PERCEPTRON / NEURONA -----------------
+
+* Capa de Entrada / Inputs
+Recibe distintos datos de entrada del exterior. Los datos de entrada corresponden al valor de las variables independientes "X" para 1 observacion del dataset (claro que pueden tener rangos diferentes y por eso se estandarizan a la misma medis 0 y desviacion estandar 1); cada variable independientre entra a una neurona diferente de esta capa.
+Estos valores de entrada se multiplicaran por un valor "w" (pesos) y se sumaran todos.
+X1w1 + X2w2 + X2w2 + ... + Xnwn; D
+
+* Capa(s) Oculta
+Pueden haber muchas capas ocultas. Se procesa la informacion. Conectan a la capa de entrada con la de salida.
+Paso 1:
+Σ Xiwi
+Paso 2:
+Se le aplica al valor anterior una funcion de activacion para ver si la neurona debe activarse.
+Paso 3:
+Si este valor es suficientemente alto, a informacion que la neurona ha calculado se transmite a la siguiente capa
+
+
+* Capa de salida
+El valor de Salida "y" representa a la variabe dependiente y corresponde a la misma observacion que se recibio en el Input, puede ser un valor continuo, binario (si/no) o categoria.
+Para el caso de salida existen tantas neuronas en la capa como categorias posibles y hay 2 para el caso de valores binarios.
+
+
+Sinapsis
+La neurona tiene que encontrar el valor optimo de los coeficientes/pesos "w", de modo que sea capaz de calcular el valor de salida ponderando cada peso por su valor de salida y sumarlos.
+
+-------------- FUNCION DE ACTIVACION -----------------
+
+Imaginemos que en un plano cartesiano el eje x representa el valor de la sumatoria "Σ Xiwi" y en el eje y estanlos valores de salida 0 y 1
+Hay 4 principales funciones de activacion:
+
+- Funcion escalon o funcio umbral
+  A partr de un valor en x, el valor de salida pasa de 0 a 1. O se activa la neurona o no se activa.
+
+- Funcion Sigmoide
+  Es 1/(1+e^-x). Es una version suavizada de la funcion anterior y da como resultados valores entre 0 y 1, que se pueden interpretar como la probabilidad de que se active la neurona.
+
+- Rectificador Lineal o Unitario
+  La mitad de la funcion esta pegada al cero y al pasar un punto en el eje x, comienza a crecer. Todo lo negativo se va a cero.
+
+- Tangente Hiperbolica
+  Es (1-e^-2x)/(1+e^-x). Tiene la misma forma que la funcion sigmoide. Esta funcion resulta en valores que van del -1 al 1.
+
+
+-------------- ¿COMO FUNCIONAN LAS REDES NEURONALES? -----------------
+
+Antes de entrar hay que definir la estructura de la red neuronal: no. de nodos de entrada, no. de capas ocultas, funciones de activacion, etc...
+
+Tomando en cuenta que se tiene 1 capa oculta de varias neuronas;  la informacion de todas las variables entra a cada una de ellas. Cada neurona intenta obtener los pcoeficientes / pesos "w" mas optimos
+
+-------------- GRADIENT DESCENT -----------------
+
+-------------- STOCHASTIC GRADIENT DESCENT -----------------
+
+-------------- BACK PROPAGATION (aprender de los errores) -----------------
