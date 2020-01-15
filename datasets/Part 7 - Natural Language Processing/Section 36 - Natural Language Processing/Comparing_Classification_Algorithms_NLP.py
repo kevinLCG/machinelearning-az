@@ -449,3 +449,11 @@ print("accuracy = " + str(accuracy_RF))
 print("precission = " + str(precission_RF))
 print("recall = " + str(recall_RF))
 print("F1-Score = " + str(F1_RF))
+
+
+accuracy_DT
+accuracy_RF
+accuracy_SVM
+accuracy_KNN
+accuracy_NB
+accuracy_KNN

@@ -1,0 +1,25 @@
+¿Recuerdas cómo en la Parte 3 - Clasificación, trabajamos con datasets compuestos únicamente de dos variables independientes? Básicamente lo hicimos así por dos motivos:
+
+    Ya que necesitábamos dos variables para visualizar mejor cómo funcionan los algoritmos de Machine Learning  (para poder representar las regiones de decisión y la frontera de predicción de cada modelo).
+
+    Ya que dado cualquier número de variables independientes en un problema, normalmente se puede acabar con únicamente dos variables independientes a través de técnicas de reducción de la dimensión.
+
+
+Existen dos tipos de técnicas para reducir la dimensión de un dataset:
+
+    Selección de características
+
+    Extracción de características
+
+
+La selección de característica incluye técnicas como la eliminación hacia atrás, la selección directa, la eliminación bidimensional, la comparación de scores y muchas más. Todas ellas las vimos ya en la Parte 2 - Regresión.
+
+En esta parte cubriremos la Extracción de características que incluyen:
+
+    Análisis de Componentes Principales (ACP)
+
+    Análisis Discriminante Lineal (LDA)
+
+    Kernel ACP
+
+    Análisis Discriminante Cuadrático (QDA)

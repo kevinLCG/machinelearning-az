@@ -1,0 +1,127 @@
+#######################################################################################################
+                                              TEMAS
+#######################################################################################################
+
+-------------- ¿QUE SON LAS REDES NEURONALES CONVOLUCIONALES? -----------------
+
+Son extremadamente usadas para la clasificacion de imagenes. Se le da como input una imagen y la salida es la categoria a la que pertenece.
+
+Una imagen es una coleccion de pixeles que almacenena un numero en el caso de que la imagen sea en blanco y negro o varios numeros si es a color, estos valores van del 0 al 255 o del 0 al 1 si se escalan. 
+Para las imagenes en blanco y negro, el ordenador transforma los pixeles en numeros dentro de un array bidimensional y en el caso de color, se genera un array tridimensional, con la informacion correspondiente a cada uno de los 3 canales de color RGB.
+
+PASOS:
+1.- Convolucion
+2.- Max Pooling
+3.- Flattening
+4.- Full Connection
+
+Se le agragan las capas anteriores a la Red -Neuronal clásica.
+
+-------------- LA CONVOLUCION -----------------
+
+Detectores de rasgos / nucleos de convolucion / filtros; hay de 5*5, 7*7, etc.
+Algunos  de estos filtros permiten detectar los bordes, difuinar una imagen o detectar ciertos razgos. 
+Se hace un producto cruz de la imagen y el filtro para dar resultado al "Mapa de cracteristicas", que contiene una version simplificada de la informacion de la imagen original, se reduce el tamaño de la matriz original y estrae los rasgos dados por la forma del filtro. 
+
+A filtro mas grandes, mapas de caracteristicas mas pequeños; lo normal es que el filtro sea impar (p.e. 11*11). Entre mas grande sea la imagen de entrada mayor debe ser el filtro, para reducir el tamaño de la imagen considerablemente.
+El filtro se va moviendo por las diferentes entradas de la matriz; primero yendo de izq. a der. y luego de arriba a abajo.
+
+Si creamos muchos mapas de caracteristicas diferentes, tenemos diferentes versiones convolucionadas de la imagen original. Cuando tenemos una coleccion de mapas de caracteristicas, estas forma una "capa de convolucion", que es un resumen de las caracteristicas de la imagen. La red neuronal se engargra de utilizarlas para hacer una peracion que  las junte a todas ellas en la siguiente capa.
+
+Filtros
+
+ -Sharpen
+ Permite afinar los contornos y agudizar la presencia de obetos en la imagen.
+ La convolucion toma el valor central y lo multiplica por un valor alto y multiplica con un valor negativo al norte, sur, este y oeste de este pixel. De esta forma se mejora la resolucion del pixel central  y se elimina el ruido que tiene con los vecinos cercanos.
+
+ -Blur
+ Difumina una imagen. Cada pixel es mezclado con los pixeles vecinos, este filtro tiene el mismo valor en los pixeles centrales.
+
+ -Edge Enhance
+ Mejora los limites de la imagen en horizontal. A cada pixel se le elimina el vecino inmediatamente anterior; el resultado son todas las lineas verticales
+
+ -Edge Detect
+ Deja solo los bordes. Se suman los 4 pixeles vecinos y se le resta el centrales.
+
+ -Emboss
+ Es una matris simetrica, que mejora los pixeles centrales e inferiores en la parte derecha. Mejora la parte que tiene relevancia cuando la imagen se ve desde la parte inferior derecha.
+
+
+-------------- CAPA RELU (Rectificadora Lineal Unitaria) -----------------
+
+Paso adicional que se aplica despues de la capa de convolucion. 
+La idea de aplicar este rectiicador lineal, es separar / aumentar todo lo que no sea la linealidad dentro de nuestra red neuronal, porque los rasgos que aparecen en las imagenes son altamente no lineales, especialmente si se quiere reconocer objetos diferentes, pero cercanos uno del otro y separar entre el objeto y el fondo. Y la transicion entre los pixeles adyacenes tiende a ser una operacion no lineal.
+
+Es por eso que para hacer diverger las fronteras entre elementos cercanos dentro de la imagen se aplica el rectificador lineal unitario.
+
+La operacion matematica de la convolucion es lineal, por lo que se corre el riesgo de que el resultado sea lineal. Cuando lo que se busca es separar / romper esa linealidad y acentuar mas los detalles que no son lineales.
+
+La capa "relu" convierte todos los valores menores a cero en cero y se introduce la NO LINEALIDAD a la imagen, resaltando las formas.
+
+Esta capa ayuda a la convergencia y a la deteccion de rasgos de las redes neuronales de convolucion.
+
+
+-------------- MAX POOLING -----------------
+
+Reduce la dimension toda via mas, es decir que ahora se obtendia un "Mapa de Caracteristicas Pooled". Lo que hace es agrupar la informacion de pixeles cercanos. La ventana que se aplica busca el valor maximo que se encuentra dentro de el, se rescata a posicion relativa de los numeros grandes.
+El tamaño de la ventana puede variar: 4*4, 3*3, etc.
+
+Este paso evita el "Overfitting".
+
+Dentro de estas tecnicas de submuestreo, existe una variacion en donde se toma el promedio de los valores de los pixeles y no el maximo.
+
+
+-------------- FLATTENING (aplanado) -----------------
+
+Consiste en convertir los arrays aray bi o tridimensionales ("Mapas de Caracteristicas Pooled") en vectores unidimensionales uno debajo del otro, esto se hace fila por fila.
+
+
+-------------- FULL CONNECTION -----------------
+
+Se agrega una red neuroal con capas totalmente conectadas al resultado de la capa anterior, el vector aplanado es la capa de entrada.
+Los nodos de intermedios detectaran que caracteristicas estan a favor de cada categoria, cada nodo de la capa oculta puede darle importancia a diferentes caracteristicas de la imagen.
+La capa de salida tendra tantos nodos como categorias y el resultado obtenido para cada nodo, sera la probababilidad de que la informacion de entrada pertenezca a dicha clase.
+
+Ej.
+El resultado seria un 85% perro y 60% gato que se comparara	con el resultado real, y con ayuda del "gradient descent" o cualquier otra tecnica se usa la funcion de coste para corregir los pesos "w".
+Desafortunadamente estas probabilidades no suman 1, por lo que es necesario aplicar operaciones de "crossed entropy" o "Soft Max".
+
+En la ultima capa oculta, hay neuronas que se especializan en detectar caracteristicas especificas de cada categoria y todos estos, primero arrojarian una probabilidad de que los datos de entrada correspondan a la 1er categoria, y si se encuentran numeros muy elevados en las neuronas que detectan las caracteristicas que corresponden a esta categoria, esto haria que estas neuronas se activen y se transmite al nodo correspondiente en la capa final y asi para cada categoria.
+
+En otras palabras, los nodos de la ultima capa emiten sus votos (que son la probabilidad de que los datos de entrada pertenezcan a la categoriia en cuestion) y se ponderan esos votos.
+
+
+-------------- SOFT MAX -----------------
+
+La funcion de Soft Max o Funcion Exponencial Normalizada es una generalizacion de la funcion Logistica
+
+
+-------------- CROSSED ENTROPY -----------------
+
+Sources:
+https://rdipietro.github.io/friendly-intro-to-cross-entropy-loss/
+
+Consiste en aplicarle un -log() a la funcion de "soft max" o tambien se puede representar como:
+H(p,q) = - Σ p(x) * log(q(x))
+
+La funcion de entropia cruzada es una mejora de la funcion de coste SME (Squared Mean Error)
+
+La forma como funciona en la Fase de Entrenamiento es la siguiente:
+Si las categorias son: Perro & Gato
+La primera observacion corresponde al perrodonde el resultado de la red neurola el 0.9 para perro y .1 para gato; los resultados correctos son 1 y 0.
+	0.9 y 0.1 paran a ser "q" & 1 y 0 pasan a ser "p", respectivamente, y se aplica la formula anterior.
+
+
+Medidas del Error:
+
+- Error de clasificacion
+  no. malas clasificaciones/clasificaciones totales
+
+- Error Cuadratico Medio (MSE)
+
+- Entropia Cruzada
+  Acentua los errores, busca que tan probable es que la red neuronal catalogue de forma incorrecta.
+  Ventajas de usarla en ves del MSE en Clasificacion (e Regresion es mejor el MSE):
+    - Si al inicio de la propagacion hacia atras el vlor de salida de la red neuronal tiende a ser muy 
+      pequeño. Lo que significa que la correccion que va a tener que hacer no sera tan obvia, es decir, el gradiente descendente tendra una modificacion muy pequeña y esto hara que al inicio al algoritmo le cueste "arrancar" y dar saltos hacia la direccion correcta.
+      Mientras que al usar a la "entropia crusada" y tener a un logaritmo en la formula, esto hace que los errores pequeños aumenten mucho.
