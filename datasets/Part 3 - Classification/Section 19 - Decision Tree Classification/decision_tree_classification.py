@@ -67,7 +67,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 # escalar las variables.
 
 #########################################################
-##   Ajustar el modelo con el dataset de Entrenamiento  #
+#    Ajustar el modelo con el dataset de Entrenamiento  #
 #########################################################
 
 # Importamos la libreria para crear el Clasificador
