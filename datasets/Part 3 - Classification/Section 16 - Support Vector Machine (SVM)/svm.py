@@ -77,9 +77,9 @@ X_train = sc_X.fit_transform(X_train)
 X_test = sc_X.transform(X_test)
 
 
-######################################################
-##   Ajustar el modelo de SVM con todo el dataset    #
-######################################################
+#################################################################
+#   Ajustar el modelo de SVM con el dataset de Entrenamiento    #
+#################################################################
 
 # Cargamos la libreria para importar el SVC (Support Vector Classifier)
 # https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html

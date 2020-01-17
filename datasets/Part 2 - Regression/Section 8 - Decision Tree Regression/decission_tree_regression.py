@@ -70,9 +70,9 @@ sc_X = StandardScaler()
 X_train = sc_X.fit_transform(X_train)
 X_test = sc_X.transform(X_test)"""
 
-############################################################
-##  Ajustar la regresión polinómica con todo el dataset    #
-############################################################
+########################################################
+#  Ajustar el modelo con el dataset de Entrenamiento   #
+########################################################
 
 #importamos la libreria para hcaer nuestro regresor
 # https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html

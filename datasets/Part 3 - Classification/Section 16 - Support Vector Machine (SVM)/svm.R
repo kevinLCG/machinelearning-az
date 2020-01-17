@@ -61,9 +61,9 @@ testing_set = subset(dataset, split == FALSE)
 training_set[,1:2] = scale(training_set[,1:2])
 testing_set[,1:2] = scale(testing_set[,1:2])
 
-######################################################
-##   Ajustar el modelo de SVM con todo el dataset    #
-######################################################
+#################################################################
+#   Ajustar el modelo de SVM con el dataset de Entrenamiento    #
+#################################################################
 
 #install.packages("e1071")
 library(e1071)

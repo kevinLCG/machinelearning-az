@@ -64,9 +64,9 @@ testing_set = subset(dataset, split == FALSE)
 training_set[,1:2] = scale(training_set[,1:2])
 testing_set[,1:2] = scale(testing_set[,1:2])
 
-######################################################################
-##   Ajustar el modelo de regresión logistica con todo el dataset    #
-######################################################################
+################################################################################
+#   Ajustar el modelo de regresión logistica con el dataset de Entrenamiento   #
+################################################################################
 
 # Utilizamos la funcion generalizada de lm (generalized linear model).
 # El parametro familiy hace referencia al tipo de regresion generalizada a llevar a cabo.

@@ -13,19 +13,28 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Importar el data set
+################################################
+###          IMPORTAR EL DATA SET            ###
+################################################
+
 dataset = pd.read_csv('Salary_Data.csv')
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, 1].values
 
 
-# Dividimos el data set en conjunto de entrenamiento y conjunto de testing
+#################################################################################
+### Dividir el data set en conjunto de entrenamiento y conjunto de testing    ###
+#################################################################################
+
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=1 / 3, random_state=0)
 
 
-# Escalado de variables
+################################################
+#            Escalado de variables             #
+################################################
+
 """
 from sklearn.preprocessing import StandardScaler
 sc_X = StandardScaler()
@@ -36,7 +45,9 @@ X_test = sc_X.transform(X_test)
 # IMPORTANTE
 # NO ES NECESARIO ESCALAR LAS VARIABLES. LA LIBRERIA SKLEARN YA LO HACE.
 
-# Crear modelo de Regresión Lienal Simple con el conjunto de entrenamiento
+#################################################################
+#  Ajustar la regresión lineal con el dataset de Entrenamiento   #
+#################################################################
 
 # Cargamos una libreria
 # https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
@@ -49,9 +60,17 @@ regression = LinearRegression()
 # (debe haber el mismo numero de filas, en la consola de iPython al momento de correrlo te da info. de los parametros con los que se corrio el comando)
 regression.fit(X_train, y_train)
 
+################################################
+#                PREDICCION                    #
+################################################
+
 # Utilizamos el conjunto de variables independientes para predecir la variable independiente (salario en este caso).
 # El resultado se guarda en una variable.
 y_pred = regression.predict(X_test)
+
+################################################
+#        VISUALIZACION DE RESULTADOS           #
+################################################
 
 # Visualizar los resultados de entrenamiento
 plt.scatter(X_train, y_train, color="red")

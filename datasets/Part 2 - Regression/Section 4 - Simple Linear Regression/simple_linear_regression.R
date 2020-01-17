@@ -3,24 +3,35 @@
 
 # Regresión Lineal Simple
 
-#Nos dirigimos a la carpeta donde se encuentra el archivo
+################################################
+###          IMPORTAR EL DATA SET            ###
+################################################
+
 setwd("/home/kevinml/Documentos/Udemy/machinelearning-az/datasets/Part 2 - Regression/Section 4 - Simple Linear Regression/")
-# Importar el dataset
 dataset = read.csv('Salary_Data.csv')
 #dataset = dataset[, 2:3]
 
-# Dividir los datos en conjunto de entrenamiento y conjunto de test
+#################################################################################
+### Dividir el data set en conjunto de entrenamiento y conjunto de testing    ###
+#################################################################################
+
 library(caTools)
 set.seed(123)
 split = sample.split(dataset$Salary, SplitRatio = 2/3)
 training_set = subset(dataset, split == TRUE)
 testing_set = subset(dataset, split == FALSE)
 
-# Escalado de valores
+################################################
+#            Escalado de variables             #
+################################################
+
 # training_set[,2:3] = scale(training_set[,2:3])
 # testing_set[,2:3] = scale(testing_set[,2:3])
 
-# Ajustar el modelo de regresión lineal simple con el conjunto de entrenamiento
+#################################################################
+#  Ajustar la regresión lineal con el dataset de Entrenamiento   #
+#################################################################
+
 # La primera variable es la dependiente y la segunda la independiene.
 regressor = lm(formula = Salary ~ YearsExperience,
                data = training_set)
@@ -30,10 +41,16 @@ regressor = lm(formula = Salary ~ YearsExperience,
 # (INTERCEPT) - ORDENADA DEL ORIGEN; suel do con cero años de experiencis
 # PENDIENTE; que tanto aumenta el sueldo por cada año de experiencia
 
-# Predecir resultados con el conjunto de test
+################################################
+#                PREDICCION                    #
+################################################
 
 # OJO: Las columnas del newdata debenllamarse igual a las que se utilizaron ara crear al modelo lineal.
 y_pred = predict(regressor, newdata = testing_set)
+
+################################################
+#        VISUALIZACION DE RESULTADOS           #
+################################################
 
 # Visualización de los resultados en el conjunto de entrenamiento
 #install.packages("ggplot2")

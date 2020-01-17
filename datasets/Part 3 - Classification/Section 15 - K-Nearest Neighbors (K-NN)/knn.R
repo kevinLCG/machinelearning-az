@@ -47,9 +47,9 @@ testing_set = subset(dataset, split == FALSE)
 training_set[,1:2] = scale(training_set[,1:2])
 testing_set[,1:2] = scale(testing_set[,1:2])
 
-#############################################################################################################
-##   Ajustar el modelo de KNN con todo el dataset de Entrenamiento y hacer la REDICCION con el de Testing   #
-#############################################################################################################
+########################################################################################################
+##   Ajustar el modelo de KNN con el dataset de Entrenamiento y hacer la REDICCION con el de Testing   #
+########################################################################################################
 
 # Cargamos la libreria "class" que contiene un conjunto de funciones para procesos de clasificacion.
 library(class)

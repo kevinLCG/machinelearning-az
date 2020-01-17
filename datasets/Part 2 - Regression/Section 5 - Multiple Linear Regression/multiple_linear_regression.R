@@ -48,7 +48,10 @@
 
 # REGRESIÓN LINEAL MÚLTIPLE
 
-# Importar el dataset
+################################################
+###          IMPORTAR EL DATA SET            ###
+################################################
+
 dataset = read.csv('/home/kevinml/Documentos/Udemy/machinelearning-az/datasets/Part 2 - Regression/Section 5 - Multiple Linear Regression/50_Startups.csv')
 #dataset = dataset[, 2:3]
 
@@ -64,18 +67,27 @@ dataset$State = factor(dataset$State,
 # a factores, evitando asi el problema de multicolinealidad.
 # ===========================================================================
 
-# Dividir los datos en conjunto de entrenamiento y conjunto de test
+#################################################################################
+### Dividir el data set en conjunto de entrenamiento y conjunto de testing    ###
+#################################################################################
+
 library(caTools)
 set.seed(123)
 split = sample.split(dataset$Profit, SplitRatio = 0.8)
 training_set = subset(dataset, split == TRUE)
 testing_set = subset(dataset, split == FALSE)
 
-# Escalado de valores
+################################################
+#            Escalado de variables             #
+################################################
+
 # training_set[,2:3] = scale(training_set[,2:3])
 # testing_set[,2:3] = scale(testing_set[,2:3])
 
-# Ajustar el modelo de Regresión Lineal Múltiple con el Conjunto de Entrenamiento
+###########################################################################
+#  Ajustar la regresión lineal múltiple con el dataset de entrenamiento   #
+###########################################################################
+
 # El punto hace refrencia a todas las demas variables, es lo mismo que: R.D.Spend + Administration + Marketing.Spend + State
 regression = lm(formula = Profit ~ .,
                 data = training_set)
@@ -84,7 +96,10 @@ summary(regression)
 # Predecir los resultados con el conjunto de testing
 y_pred = predict(regression, newdata = testing_set)
 
-# Construir un modelo óptimo con la Eliminación hacia atrás.
+########################################################################
+# Construir el modelo óptimo de RLM utilizando ELIMINACIÓN HACIA ATRÁS #
+########################################################################
+
 # Empezamos  utilizando un modelo que considera todas las variables.
 SL = 0.05
 regression = lm(formula = Profit ~ R.D.Spend + Administration + Marketing.Spend + State,

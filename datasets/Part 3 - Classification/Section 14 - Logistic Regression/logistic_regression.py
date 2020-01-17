@@ -83,9 +83,9 @@ X_test = sc_X.transform(X_test)
 # En este caso no hace falta escalar la variable dependiente porque por si misma
 # ya es una categoria (0 o 1).
 
-######################################################################
-##   Ajustar el modelo de regresión logistica con todo el dataset    #
-######################################################################
+################################################################################
+#   Ajustar el modelo de regresión logistica con el dataset de Entrenamiento   #
+################################################################################
 
 # Cargamos la libreria para generar nuestro modelo de clasificacion
 # https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html

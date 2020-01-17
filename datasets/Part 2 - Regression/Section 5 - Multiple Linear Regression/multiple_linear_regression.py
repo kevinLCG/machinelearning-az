@@ -62,7 +62,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Importar el data set
+################################################
+###          IMPORTAR EL DATA SET            ###
+################################################
+
 dataset = pd.read_csv('50_Startups.csv')
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, 4].values
@@ -79,17 +82,27 @@ X = onehotencoder.fit_transform(X).astype(float)
 # Evitar la trampa de las variables ficticias al quitar la primera columna
 X = X[:, 1:]
 
-# Dividir el data set en conjunto de entrenamiento y conjunto de testing
+#################################################################################
+### Dividir el data set en conjunto de entrenamiento y conjunto de testing    ###
+#################################################################################
+
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=0)
 
 
-# Escalado de variables
+################################################
+#            Escalado de variables             #
+################################################
+
 """from sklearn.preprocessing import StandardScaler
 sc_X = StandardScaler()
 X_train = sc_X.fit_transform(X_train)
 X_test = sc_X.transform(X_test)"""
+
+###########################################################################
+#  Ajustar la regresión lineal múltiple con el dataset de entrenamiento   #
+###########################################################################
 
 # Ajustar el modelo de Regresión lineal múltiple con el conjunto de entrenamiento
 from sklearn.linear_model import LinearRegression
@@ -106,7 +119,9 @@ y_pred = regression.predict(X_test)
 # Vamos a ver si el modelo utilizando todas las variables que utilizamos es el mejor
 # o si al quitar variables se obtiene un mejor resultado.
 
-# Construir el modelo óptimo de RLM utilizando ELIMINACIÓN HACIA ATRÁS
+########################################################################
+# Construir el modelo óptimo de RLM utilizando ELIMINACIÓN HACIA ATRÁS #
+########################################################################
 
 # Podria ser que lo que fuera muy cercano a cero fuera el termino independiente, pero no hay un modo de saberlo
 # directamente. Entonces se agrega 1 columa al conjunto de datos con puros 1's y el coeficiente que los tome en cuenta
@@ -131,7 +146,7 @@ X_opt = X[:, [0, 1, 2, 3, 4, 5]]
 # matriz de las variables/caracteristicas. Con fit(), se hace el ajuste
 regression_OLS = sm.OLS(endog=y, exog=X_opt).fit()
 # Al hacer el summary, lo importante son los coeficientes, el p-value y el intervalo de confianza.
-# El p-value indica que tan probables que que el coeficiente sea igual a cero; si el 0 esta dentro 
+# El p-value indica que tan probables que que el coeficiente sea igual a cero; si el 0 esta dentro
 # del intervalo de confianza, el p*value sera alto.
 regression_OLS.summary()
 
@@ -159,5 +174,5 @@ X_opt = X[:, [0, 3]]
 regression_OLS = sm.OLS(endog=y, exog=X_opt).fit()
 regression_OLS.summary()
 
-# PODEMOS VER QUE ESTE ULTIMO P-VALUE ES 0.06, MUY CERCA DE 0.05. 
+# PODEMOS VER QUE ESTE ULTIMO P-VALUE ES 0.06, MUY CERCA DE 0.05.
 # EN ESTOS CASOS ES CONVENIENTE USAR AIC O BIC PARA DECIDIR DE MEJOR MANERA SI SE CONSERVA O NO UNA VARIABLE.

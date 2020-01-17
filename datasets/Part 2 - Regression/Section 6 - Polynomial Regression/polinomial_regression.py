@@ -77,9 +77,9 @@ from sklearn.linear_model import LinearRegression
 lin_reg = LinearRegression()
 lin_reg.fit(X, y)
 
-############################################################
-##  Ajustar la regresión polinómica con todo el dataset    #
-############################################################
+#######################################################################
+#  Ajustar la regresión polinómica con el dataset de Entrenamiento   #
+#######################################################################
 
 from sklearn.preprocessing import PolynomialFeatures
 # Seleccionamos el grado hasta el que queremos nuestra regresion pilinomica

@@ -28,9 +28,9 @@ testing_set = subset(dataset, split == FALSE)
 training_set[,1:2] = scale(training_set[,1:2])
 testing_set[,1:2] = scale(testing_set[,1:2])
 
-######################################################################
-##       Ajustar el modelo de clasificacion con todo el dataset      #
-######################################################################
+#########################################################################
+#  Ajustar el modelo de Clasificacion con el dataset de Entrenamiento   #
+#########################################################################
 
 # Crear el modelo de clasificación
 

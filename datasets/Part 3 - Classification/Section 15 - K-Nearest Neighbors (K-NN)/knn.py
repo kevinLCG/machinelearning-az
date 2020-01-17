@@ -65,9 +65,9 @@ X_test = sc_X.transform(X_test)
 # En este caso no hace falta escalar la variable dependiente porque por si misma
 # ya es una categoria (0 o 1).
 
-######################################################
-##   Ajustar el modelo de KNN con todo el dataset    #
-######################################################
+#################################################################
+#   Ajustar el modelo de KNN con el dataset de Entrenamiento    #
+#################################################################
 
 # Importamos la libreria para eobtener el modelo de KNN
 # https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html

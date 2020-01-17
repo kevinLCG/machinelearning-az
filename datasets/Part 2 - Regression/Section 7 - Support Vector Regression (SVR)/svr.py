@@ -130,18 +130,19 @@ from sklearn.preprocessing import StandardScaler
 sc_X = StandardScaler()
 sc_y = StandardScaler()
 X = sc_X.fit_transform(X)
-y = sc_y.fit_transform(y.reshape(-1, 1)) # redimensionamos a y para que sea un vector columna (matriz).
+# redimensionamos a y para que sea un vector columna (matriz).
+y = sc_y.fit_transform(y.reshape(-1, 1))
 
 # Lo malo de escalar las variables, es que al hacer la grafica, los
 # ejes pierden el sentido que tenian. Aunque hay una funcion inversa que
 # te permite darle sentido a las predicciones.
 
-################################################
-#     Ajustar la regresión con el dataset      #
-################################################
+########################################################
+#  Ajustar el modelo con el dataset de Entrenamiento   #
+########################################################
 
 from sklearn.svm import SVR
-# Por defecto el kernel es rbf (Radial Base Function), un tipo de gaussiano. Puedes poner 
+# Por defecto el kernel es rbf (Radial Base Function), un tipo de gaussiano. Puedes poner
 # uno lineal, uno polinomial, etc.
 regression = SVR(kernel="rbf", gamma="auto")
 regression.fit(X, y)
@@ -154,7 +155,8 @@ regression.fit(X, y)
 # Aplicamos la prediccion al escalado del valor 6.5 y 2, luego invocamos a la
 # funcion inversa de transform, para que el resultado obtenido tenga sentido
 # nuevamente.
-y_pred = sc_y.inverse_transform(regression.predict(sc_X.transform(np.array([[6.5],[2]]))))
+y_pred = sc_y.inverse_transform(regression.predict(
+    sc_X.transform(np.array([[6.5], [2]]))))
 
 ################################################
 #        VISUALIZACION DE RESULTADOS           #

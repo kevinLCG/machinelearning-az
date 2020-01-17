@@ -106,9 +106,9 @@ dataset = dataset[, 2:3]
 # training_set[,2:3] = scale(training_set[,2:3])
 # testing_set[,2:3] = scale(testing_set[,2:3])
 
-################################################
-#     Ajustar la regresión con el dataset      #
-################################################
+########################################################
+#  Ajustar el modelo con el dataset de Entrenamiento   #
+########################################################
 
 #install.packages("e1071")
 library(e1071)

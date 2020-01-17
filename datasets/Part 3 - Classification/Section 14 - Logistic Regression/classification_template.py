@@ -43,9 +43,9 @@ X_train = sc_X.fit_transform(X_train)
 X_test = sc_X.transform(X_test)
 
 
-######################################################################
-##       Ajustar el modelo de clasificacion con todo el dataset      #
-######################################################################
+#########################################################################
+#  Ajustar el modelo de Clasificacion con el dataset de Entrenamiento   #
+#########################################################################
 
 # Crear el modelo de clasificación aquí
 

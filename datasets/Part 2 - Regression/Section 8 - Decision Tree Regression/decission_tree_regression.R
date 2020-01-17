@@ -55,9 +55,9 @@ dataset = dataset[, 2:3]
 # testing_set[,2:3] = scale(testing_set[,2:3])
 
 
-################################################
-#     Ajustar la regresión con el dataset      #
-################################################
+########################################################
+#  Ajustar el modelo con el dataset de Entrenamiento   #
+########################################################
 
 # install.packages("rpart")
 # Crgamos la libreria "rpart" (Recursive Partitioning and Regression Tree)
